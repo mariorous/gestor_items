@@ -2,7 +2,7 @@
     font-family: Poppins;
 }
 
-.container{
+.container {
     width: 60%;
     margin: 0 auto;
     display: flex;
@@ -11,7 +11,7 @@
     border-radius: 20px;
 }
 
-.container img{
+.container img {
     margin-left: 50px;
     width: 150px;
     height: 150px;
@@ -29,17 +29,17 @@
     font-size: 18px;
 }
 
-.container .fecha-create{
+.container .fecha-create {
     margin-right: 5%;
     margin-top: 50px;
 }
 
-.container .fecha-modificate{
+.container .fecha-modificate {
     margin-right: 5%;
     margin-top: 50px;
 }
 
-.container .button button{
+.container .button button {
     margin-right: 5%;
     margin-top: 55px;
     color: #FFF;
@@ -50,7 +50,7 @@
     border-radius: 10px;
 }
 
-.container .button button:hover{
+.container .button button:hover { 
     color: #FFF;
     background-color:#0006be ;
 }
