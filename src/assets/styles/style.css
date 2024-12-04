@@ -1,3 +1,54 @@
 * {
     font-family: Poppins;
+    margin: 0;
+    padding: 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+}
+
+.logo-name-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo-name-container img {
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+    border-radius: 20%; /* Hace la imagen redonda */
+    object-fit: cover;
+}
+
+.logo-name-container h1 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3C43F9;
+}
+
+.search-input input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    width: 400px;
+}
+
+.search-input input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 5px;
+    width: 400px;
+    outline: none; /* Elimina el borde de enfoque predeterminado del navegador */
+}
+
+.search-input input:focus {
+    border: 2px solid #3C43F9; /* Borde azul al hacer clic */
 }
