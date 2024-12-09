@@ -1,3 +1,5 @@
+import { ItemSimple } from './ItemSimple.js';
+
 export class ItemVisual extends ItemSimple {
 
     #imageURL
