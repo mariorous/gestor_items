@@ -4,8 +4,8 @@ export class ItemVisual extends ItemSimple {
 
     #imageURL
 
-    constructor(name, description, createData, modificationData, imageURL) {
-        super(name, description, createData, modificationData);
+    constructor(name, description, creationDate, modificationDate, imageURL) {
+        super(name, description, creationDate, modificationDate);
         this.#imageURL = imageURL;
     }
 
