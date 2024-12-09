@@ -4,6 +4,7 @@
     padding: 0;
 }
 
+/* CSS del header */
 .header-container {
     display: flex;
     justify-content: space-between;
@@ -53,3 +54,36 @@
 .search-input input:focus {
     border: 2px solid #3C43F9;
 }
+
+/* CSS de la tabla de items */
+.container-table {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    margin: 100px auto;
+}
+
+.btn-new-product {
+    color: #FFF;
+    background-color:#3C43F9 ;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+}
+
+.btn-new-product:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.headers-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table-header {
+    padding: 20px 0;
+    font-size: 18px;
+}
+
