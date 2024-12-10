@@ -87,3 +87,92 @@
     font-size: 18px;
 }
 
+/* CSS de la tarjeta item */
+.container {
+    width: 60%;
+    margin: 0 auto;
+    display: flex;
+    border: 2px solid;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.container img {
+    margin-left: 50px;
+    width: 150px;
+    height: 150px;
+    margin-right: 30px;
+}
+
+.container .product-desc {
+    margin-right: 100px;
+}
+.container .product-desc h3 {
+    margin-bottom: 60px;
+}
+
+.container .product-desc p {
+    font-size: 18px;
+}
+
+.container .creation-date {
+    margin-right: 5%;
+    margin-top: 50px;
+}
+
+.container .modification-date {
+    margin-right: 5%;
+    margin-top: 50px;
+}
+
+.container .button button {
+    margin-right: 5%;
+    margin-top: 55px;
+    color: #FFF;
+    background-color:#3C43F9 ;
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 10px;
+}
+
+.container .button button:hover { 
+    color: #FFF;
+    background-color:#0006be ;
+}
+
+/* CSS del modal */
+label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+textarea {
+    margin-bottom: 10px;
+}
+
+#item-simple {
+    display: none;
+}
+
+#item-visual {
+    display: none;
+}
+
+#buttons-selection h2 {
+    text-align: center;
+    font-size: 22px;
+    margin: 20px;
+}
+
+.buttons-selection {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
