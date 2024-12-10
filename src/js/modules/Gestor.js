@@ -1,56 +1,90 @@
+import { LocalStorage } from "./LocalStorage.js";
+
 export class Gestor {
-    #products
+    #items
 
     constructor() {
-        this.products = [];
+        this.items = [];
     }
 
-    addProduct(product) {
-        this.products.push(product);
+    addItem(item) {
+        if (localStorage.getItem('items') === null) {
+            this.items = [];
+        } else {
+            this.items = LocalStorage.getItems();
+        }
+        console.log('Items antes de añadir el actual: ', this.items);
+
+        this.items.push(item);
+        LocalStorage.setItems(JSON.stringify(this.items));
     }
 
-    updateProduct(product) {
-        this.products.forEach((p, index) => {
-            if (p.id === product.id) {
-                this.products[index] = product;
+    /* updateItem(item) {
+        this.items.forEach((p, index) => {
+            if (p.id === item.id) {
+                this.items[index] = item;
             }
         });
     }
+    */
 
-    removeProduct(product) {
-        this.products.splice(this.products.indexOf(product), 1);
+    removeItem(nameToDelete) {
+        if (localStorage.getItem('items') === null) {
+            this.items = [];
+        } else {
+            this.items = LocalStorage.getItems();
+        }
+
+        this.items = this.items.filter(item => item.name !== nameToDelete);
+        LocalStorage.setItems(JSON.stringify(this.items));
+        this.renderTable();
     }
+    
 
     renderTable() {
-        this.products.forEach(product => {
+        const tableContent = document.querySelector(".table-content");
+        this.items = LocalStorage.getItems();
+        this.items.forEach(item => {
             let itemInfo = `
-                <div class="container">
-                    <div class="image-url">
-                        <img src="${product.imageURL}" alt="">
-                    </div>
-                    <div class="product-desc">
-                        <h3>${product.name}</h3>
-                        <p>${product.description}</p>
+                <div class="container-card">
+                    <div class="img-info-div">
+
+                        <div class="image-url">
+                    `;
+
+                if (item.imageURL) {
+                    itemInfo += `<img class="item-image" src="${item.imageURL}" alt="Imagen del producto">`;
+                } else {
+                    itemInfo += `<img class="item-image no-image" src="./src/assets/no_image.jpg" alt="Imagen del producto">`;
+                }
+
+                itemInfo += ` </div>
+                        <div class="item-desc">
+                            <h3>${item.name}</h3>
+                            <p>${item.description}</p>
+                        </div>
                     </div>
                     <div class="creation-date">
-                        <p>${product.creationDate}</p>
+                        <p>${item.creationDate}</p>
                     </div>
                     <div class="modification-date">
-                        <p>${product.modificationDate}</p>
+                        <p>${item.modificationDate}</p>
                     </div>
                     <div class="button">
-                        <button>Editar</button>
+                        <button class="delete-item-btn" name-item="${item.name}">Eliminar</button>
                     </div>
                 </div>
             `;
+
+        tableContent.innerHTML += itemInfo;
         });
     }
 
-    set products(products) {
-        this.#products = products;
+    set items(items) {
+        this.#items = items;
     }
 
-    get products() {
-        return this.#products;
+    get items() {
+        return this.#items;
     }
 }

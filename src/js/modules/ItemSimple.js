@@ -5,11 +5,21 @@ export class ItemSimple {
     #modificationDate
 
     constructor(name, description, creationDate, modificationDate) {
-        this.#name = name
-        this.#description = description
-        this.#description = creationDate
-        // this.#creationDate = new Date()
-        this.#modificationDate = modificationDate
+        this.name = name
+        this.description = description
+        this.creationDate = creationDate
+        this.modificationDate = modificationDate
+    }
+
+    toJSON() {
+        let toJson = {
+            name: this.name,
+            description: this.description,
+            creationDate: this.creationDate,
+            modificationDate: this.modificationDate
+        };
+
+        return toJson;
     }
 
     set name(name) {

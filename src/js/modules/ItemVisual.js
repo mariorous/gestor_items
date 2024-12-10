@@ -6,7 +6,19 @@ export class ItemVisual extends ItemSimple {
 
     constructor(name, description, creationDate, modificationDate, imageURL) {
         super(name, description, creationDate, modificationDate);
-        this.#imageURL = imageURL;
+        this.imageURL = imageURL;
+    }
+
+    toJSON() {
+        let toJson = {
+            name: this.name,
+            description: this.description,
+            creationDate: this.creationDate,
+            modificationDate: this.modificationDate,
+            imageURL: this.imageURL
+        };
+
+        return toJson;
     }
 
     set imageURL(imageURL) {
