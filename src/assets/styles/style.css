@@ -65,6 +65,9 @@ p {
     flex-direction: column;
     width: 80%;
     margin: 100px auto;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .btn-new-item {
@@ -83,11 +86,30 @@ p {
 
 .headers-container {
     display: flex;
-    justify-content: space-between;
+    margin: 30px 0 30px 0;
+    background: #3c42fa;
+    border-radius: 20px;
+    color: #000;
+    height: 60px;
+    align-items: center;
+}
+
+.product-list-header {
+    margin-left: 125px;
+}
+
+.creation-date-header {
+    margin-left: 575px;
+}
+
+.modification-date-header {
+    margin-left: 40px;
 }
 
 .table-header {
-    padding: 20px 0;
+    background: #fff;
+    padding: 5px 10px;
+    border-radius: 10px;
     font-size: 18px;
 }
 
@@ -102,7 +124,7 @@ p {
     width: 100%;
     align-items: center;
     display: flex;
-    border: 2px solid;
+    border: 2px solid #ccc;
     border-radius: 20px;
     justify-content: space-between;
     padding: 10px 20px;
@@ -133,7 +155,7 @@ p {
 
 .container-card .item-desc {
     font-size: 16px;
-    width: 700px;
+    width: 600px;
 }
 
 .container-card .button button {
