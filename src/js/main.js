@@ -58,6 +58,7 @@ searchInput.addEventListener('input', () => {
     itemsFromStorage = itemsFromStorage.filter(item => item.name.toLowerCase().includes(searchInput.value.toLowerCase()));
     gestor.items = itemsFromStorage;
     gestor.renderTable(true);
+    addDeleteListeners();
 })
 
 btnNewItem.addEventListener("click", () => {
