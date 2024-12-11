@@ -53,6 +53,7 @@ p {
     border-radius: 5px;
     width: 400px;
     outline: none; /* Elimina el borde de enfoque predeterminado del navegador */
+    margin-bottom: 0px; /* Elimina el margen inferior del input */
 }
 
 .search-input input:focus {
