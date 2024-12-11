@@ -17,6 +17,7 @@ export class Gestor {
 
         this.items.push(item);
         LocalStorage.setItems(JSON.stringify(this.items));
+        this.renderTable();
     }
 
     /* updateItem(item) {
@@ -43,6 +44,8 @@ export class Gestor {
 
     renderTable() {
         const tableContent = document.querySelector(".table-content");
+        tableContent.innerHTML = ""; // Limpia el contenido previo de la tabla
+
         this.items = LocalStorage.getItems();
         this.items.forEach(item => {
             let itemInfo = `
@@ -71,7 +74,7 @@ export class Gestor {
                         <p>${item.modificationDate}</p>
                     </div>
                     <div class="button">
-                        <button class="delete-item-btn" name-item="${item.name}">Eliminar</button>
+                        <button class="delete-item-btn" name-item="${item.name}" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Eliminar</button>
                     </div>
                 </div>
             `;

@@ -8,13 +8,42 @@ const simpleBtn = document.getElementById("simple-btn");
 const visualBtn = document.getElementById("visual-btn");
 let itemSlected;
 
+function showAlert(message, type = "success") {
+    const alertContainer = document.getElementById("alertContainer");
+  
+    // Crear una alerta dinámica
+    const alert = document.createElement("div");
+    alert.className = `alert alert-${type} alert-dismissible fade show`;
+    alert.role = "alert";
+    alert.innerHTML = `
+      ${message}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+  
+    // Añadir la alerta al contenedor
+    alertContainer.appendChild(alert);
+  
+    // Configurar la desaparición automática después de 3 segundos
+    setTimeout(() => {
+      alert.classList.remove("show"); // Inicia la animación de desvanecimiento
+      setTimeout(() => alert.remove(), 150); // Elimina el elemento después de la animación
+    }, 3000);
+  }
+  
+
 function addDeleteListeners() {
     const deleteItemBtn = document.querySelectorAll(".delete-item-btn");
     deleteItemBtn.forEach(btn => {
         btn.addEventListener("click", () => {
-            let nameToDelete =btn.getAttribute("name-item");
-            gestor.removeItem(nameToDelete);
-            addDeleteListeners();
+            const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+            confirmDeleteBtn.addEventListener("click", () => {
+                let nameToDelete = btn.getAttribute("name-item");
+                gestor.removeItem(nameToDelete);
+                addDeleteListeners();
+                $('#confirmDeleteModal').modal("hide");
+                // Mostrar notificación de eliminación
+                showAlert(`El ítem "${nameToDelete}" se ha eliminado correctamente.`, "danger");
+            });
         });
     });
 }
@@ -62,7 +91,6 @@ createItem.addEventListener("click", () => {
         const item = new ItemSimple(name, description, creationDate, modificationDate);
         gestor.addItem(item.toJSON());
         $('#createItem').modal("hide");
-        gestor.renderTable();
     } else if (itemSlected === "visual") {
         name = document.getElementById("create-visual-name").value;
         description = document.getElementById("create-visual-description").value;
@@ -72,10 +100,12 @@ createItem.addEventListener("click", () => {
         const item = new ItemVisual(name, description, creationDate, modificationDate, imageURL);
         gestor.addItem(item.toJSON());
         $('#createItem').modal("hide");
-        gestor.renderTable();
     } else {
         console.log('Ha ocurrido un error con la selección del item');
     }
+    // Mostrar notificación de creación
+    showAlert(`El ítem "${name}" se ha creado correctamente.`, "success");
+    addDeleteListeners();
     console.log('Inventario del gestor: ', gestor.items);
 
 });

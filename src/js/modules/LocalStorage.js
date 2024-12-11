@@ -5,20 +5,8 @@ export class LocalStorage {
     static #storage = localStorage;
 
     static setItems(items) {
-        console.log('Items antes de guardar en LS: ', items);
         this.#storage.setItem('items', items);
     }
-
-/*     static getItem(key) {
-        const storedData = JSON.parse(localStorage.getItem(key));
-        const productInstance = new ItemSimple(
-            storedData.name,
-            storedData.description,
-            storedData.creationDate,
-            storedData.modificationDate
-        );
-        return productInstance;
-    } */
 
     static getItems() {
         // Recupera los objetos del localStorage
