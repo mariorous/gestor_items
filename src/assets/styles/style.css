@@ -87,16 +87,15 @@ p {
 
 .headers-container {
     display: flex;
-    margin: 30px 0 30px 0;
-    background: #3c42fa;
-    border-radius: 20px;
+    margin: 30px auto;
+    width: 95%;
     color: #000;
-    height: 60px;
+    border-bottom: 2px solid #ccc;
     align-items: center;
 }
 
 .product-list-header {
-    margin-left: 125px;
+    margin-left: 85px;
 }
 
 .creation-date-header {
@@ -104,14 +103,14 @@ p {
 }
 
 .modification-date-header {
-    margin-left: 40px;
+    margin-left: 30px;
 }
 
 .table-header {
     background: #fff;
     padding: 5px 10px;
-    border-radius: 10px;
     font-size: 18px;
+    margin-bottom: 5px;
 }
 
 .table-content {
