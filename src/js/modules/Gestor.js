@@ -42,11 +42,32 @@ export class Gestor {
     }
     
 
-    renderTable() {
+    renderTable(filtering) {
         const tableContent = document.querySelector(".table-content");
         tableContent.innerHTML = ""; // Limpia el contenido previo de la tabla
 
-        this.items = LocalStorage.getItems();
+        // Si no está filtrando, mostrar todos los ítems del localStorage
+        if (!filtering) {
+            this.items = LocalStorage.getItems();
+        }
+
+        // Si no hay ítems, mostrar un mensaje
+        if (this.items.length === 0) {
+            tableContent.innerHTML = `
+                <div class="no-items-message">
+                    <div class="no-items-icon">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="no-items-text">
+                        <h3>No se encontraron ítems</h3>
+                        <p>Intenta ajustar tu búsqueda o añadir nuevos productos.</p>
+                    </div>
+                </div>
+            `;
+            return;
+        }
+
+        // Si está filtrando, mostrar solo los ítems que coincidan con el filtro
         this.items.forEach(item => {
             let itemInfo = `
                 <div class="container-card">

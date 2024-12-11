@@ -51,6 +51,15 @@ function addDeleteListeners() {
 gestor.renderTable();
 addDeleteListeners();
 
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', () => {
+    console.log(searchInput.value);
+    let itemsFromStorage = LocalStorage.getItems();
+    itemsFromStorage = itemsFromStorage.filter(item => item.name.toLowerCase().includes(searchInput.value.toLowerCase()));
+    gestor.items = itemsFromStorage;
+    gestor.renderTable(true);
+})
+
 btnNewItem.addEventListener("click", () => {
     document.getElementById("buttons-selection").style.display = "block";
     document.getElementById("item-simple-form").style.display = "none";
