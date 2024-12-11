@@ -9,7 +9,6 @@ export class LocalStorage {
     }
 
     static getItems() {
-        // Recupera los objetos del localStorage
         // Verificar si existe 'items' en el localStorage
         const itemsFromStorage = JSON.parse(this.#storage.getItem('items')) || [];
 
