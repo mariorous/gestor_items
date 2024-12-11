@@ -10,8 +10,13 @@ export class LocalStorage {
 
     static getItems() {
         // Recupera los objetos del localStorage
-        const itemsFromStorage = JSON.parse(this.#storage.getItem('items'));
+        // Verificar si existe 'items' en el localStorage
+        const itemsFromStorage = JSON.parse(this.#storage.getItem('items')) || [];
 
+        // Si el localStorage está vacío, inicializarlo como un arreglo vacío
+        if (!itemsFromStorage.length) {
+            this.#storage.setItem('items', JSON.stringify([]));
+        }
         // Convierte los objetos a instancias adecuadas según el tipo
         const items = itemsFromStorage.map(itemData => {
             if (itemData.imageURL) {
