@@ -97,6 +97,55 @@
         </div>
       </div>
 
+      <!-- Modal para editar producto -->
+    <div class="modal fade" id="updateItem" tabindex="-1" aria-labelledby="updateItemLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <!-- Encabezado del modal -->
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateItemLabel">Editar item</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <!-- Item simple -->
+          <div id="item-simple-form" class="modal-body">
+            <label for="update-simple-name">Nombre</label>
+            <input type="text" class="form-control" id="update-simple-name" placeholder="Ingrese el nombre del producto">
+
+            <label for="update-simple-description">Descripción</label>
+            <textarea class="form-control" id="update-simple-description" placeholder="Ingrese la descripción del producto"></textarea>
+
+            <label for="update-simple-creationDate">Fecha de creación</label>
+            <input type="date" class="form-control" id="update-simple-creationDate" value="" disabled>
+
+            <label for="update-simple-modificationDate">Fecha de modificación</label>
+            <input type="date" class="form-control" id="update-simple-modificationDate" value="" disabled>
+          </div>
+          <!-- Item visual -->
+          <div id="item-visual-form" class="modal-body">
+            <label for="update-visual-name">Nombre</label>
+            <input type="text" class="form-control" id="update-visual-name" placeholder="Ingrese el nombre del producto">
+
+            <label for="update-visual-description">Descripción</label>
+            <textarea class="form-control" id="update-visual-description" placeholder="Ingrese la descripción del producto"></textarea>
+
+            <label for="update-visual-creationDate">Fecha de creación</label>
+            <input type="date" class="form-control" id="update-visual-creationDate" value="" disabled>
+
+            <label for="update-visual-modificationDate">Fecha de modificación</label>
+            <input type="date" class="form-control" id="update-visual-modificationDate" value="" disabled>
+
+            <label for="update-visual-imageURL">Imagen</label>
+            <input type="text" class="form-control" id="update-visual-imageURL" placeholder="Ingrese la URL de la imagen">
+          </div>
+          <!-- Pie de página del modal -->
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" id="update-item" class="btn btn-primary">Editar item</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
       <!-- Modal para confirmar eliminación de un item -->
       <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteLabel" aria-hidden="true">
         <div class="modal-dialog">

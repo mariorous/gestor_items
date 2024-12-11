@@ -35,8 +35,9 @@ function addUpdateListeners() {
     updateItemBtn.forEach(btn => {
         btn.addEventListener("click", () => {
             let nameToUpdate = btn.getAttribute("name-item");
+            let typeItem = btn.getAttribute("type-item");
             console.log(nameToUpdate);
-
+            console.log(typeItem);
         });
     });
 }

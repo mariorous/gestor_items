@@ -77,13 +77,18 @@ export class Gestor {
                     `;
 
                 if (item.imageURL) {
-                    itemInfo += `<img class="item-image" src="${item.imageURL}" alt="Imagen del producto">`;
+                    itemInfo += `<img class="item-image" src="${item.imageURL}" alt="Imagen del producto">
+                                </div>
+                                <div class="item-desc" name-item="${item.name}" type-item="visual" data-bs-toggle="modal" data-bs-target="#updateItem">
+                    `;
                 } else {
-                    itemInfo += `<img class="item-image no-image" src="./src/assets/no_image.jpg" alt="Imagen del producto">`;
+                    itemInfo += `<img class="item-image no-image" src="./src/assets/no_image.jpg" alt="Imagen del producto">
+                                </div>
+                                <div class="item-desc" name-item="${item.name}" type-item="simple" data-bs-toggle="modal" data-bs-target="#updateItem">
+                    `;
                 }
 
-                itemInfo += ` </div>
-                        <div class="item-desc" name-item="${item.name}">
+                itemInfo += `
                             <h3>${item.name}</h3>
                             <p>${item.description}</p>
                         </div>
