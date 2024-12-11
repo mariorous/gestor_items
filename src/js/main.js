@@ -29,7 +29,17 @@ function showAlert(message, type = "success") {
       setTimeout(() => alert.remove(), 150); // Elimina el elemento después de la animación
     }, 3000);
   }
-  
+
+function addUpdateListeners() {
+    const updateItemBtn = document.querySelectorAll(".item-desc");
+    updateItemBtn.forEach(btn => {
+        btn.addEventListener("click", () => {
+            let nameToUpdate = btn.getAttribute("name-item");
+            console.log(nameToUpdate);
+
+        });
+    });
+}
 
 function addDeleteListeners() {
     const deleteItemBtn = document.querySelectorAll(".delete-item-btn");
@@ -50,6 +60,7 @@ function addDeleteListeners() {
 
 gestor.renderTable();
 addDeleteListeners();
+addUpdateListeners();
 
 const searchInput = document.getElementById('searchInput');
 searchInput.addEventListener('input', () => {

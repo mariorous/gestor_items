@@ -83,7 +83,7 @@ export class Gestor {
                 }
 
                 itemInfo += ` </div>
-                        <div class="item-desc">
+                        <div class="item-desc" name-item="${item.name}">
                             <h3>${item.name}</h3>
                             <p>${item.description}</p>
                         </div>
