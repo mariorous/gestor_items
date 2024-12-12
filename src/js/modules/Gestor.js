@@ -20,14 +20,22 @@ export class Gestor {
         this.renderTable();
     }
 
-    /* updateItem(item) {
-        this.items.forEach((p, index) => {
-            if (p.id === item.id) {
-                this.items[index] = item;
+    updateItem(itemToUpdate) {
+        let items = LocalStorage.getItems();
+
+        // Iterar por los ítems y actualizar el que coincide
+        items.forEach(item => {
+            if (item.name === itemToUpdate.name) {
+                item.description = itemToUpdate.description;
+                item.creationDate = itemToUpdate.creationDate;
+                item.modificationDate = itemToUpdate.modificationDate;
+                item.imageURL = itemToUpdate.imageURL;
             }
         });
+
+        LocalStorage.setItems(JSON.stringify(items));
+        this.renderTable();
     }
-    */
 
     removeItem(nameToDelete) {
         if (localStorage.getItem('items') === null) {

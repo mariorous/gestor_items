@@ -58,6 +58,7 @@ function showAlert(message, type = "success") {
             document.getElementById("update-item-simple-form").style.display = "block";
             document.getElementById("update-item-visual-form").style.display = "none";
 
+            document.getElementById("update-simple-name").disabled = true;
             document.getElementById("update-simple-name").value = itemToUpdate.name;
             document.getElementById("update-simple-description").value = itemToUpdate.description;
             document.getElementById("update-simple-creationDate").value = itemToUpdate.creationDate;
@@ -72,13 +73,15 @@ function showAlert(message, type = "success") {
                 itemToUpdate.description = description;
                 itemToUpdate.creationDate = creationDate;
                 itemToUpdate.modificationDate = modificationDate;
-                console.log(itemToUpdate);
-                // gestor.updateItem(itemToUpdate);
+                gestor.updateItem(itemToUpdate);
+                $('#updateItem').modal("hide");
+                showAlert(`El ítem "${nameToUpdate}" se ha editado correctamente.`, "warning");
             });
         } else if (typeItem === "visual") {
             document.getElementById("update-item-simple-form").style.display = "none";
             document.getElementById("update-item-visual-form").style.display = "block";
 
+            document.getElementById("update-visual-name").disabled = true;
             document.getElementById("update-visual-name").value = itemToUpdate.name;
             document.getElementById("update-visual-description").value = itemToUpdate.description;
             document.getElementById("update-visual-creationDate").value = itemToUpdate.creationDate;
@@ -96,13 +99,16 @@ function showAlert(message, type = "success") {
                 itemToUpdate.creationDate = creationDate;
                 itemToUpdate.modificationDate = modificationDate;
                 itemToUpdate.imageURL = imageURL;
-                console.log(itemToUpdate);
-                // gestor.updateItem(itemToUpdate);
+                gestor.updateItem(itemToUpdate);
+                $('#updateItem').modal("hide");
+                showAlert(`El ítem "${nameToUpdate}" se ha editado correctamente.`, "warning");
             });
         } else {
             console.log('Ha habido un error con el tipo de item');
         }
-
+        
+        addDeleteListeners();
+        addUpdateListeners();
     });
 }
 
