@@ -6,7 +6,7 @@ const btnNewItem = document.querySelector(".btn-new-item");
 const createItem = document.getElementById("create-item");
 const simpleBtn = document.getElementById("simple-btn");
 const visualBtn = document.getElementById("visual-btn");
-let itemSlected;
+let itemSelected;
 
 function showAlert(message, type = "success") {
     const alertContainer = document.getElementById("alertContainer");
@@ -195,6 +195,17 @@ searchInput.addEventListener('input', () => {
     addUpdateListeners();
 });
 
+function clearInputs(itemType) {
+    if (itemType === "simple") {
+        document.getElementById("create-simple-name").value = "";
+        document.getElementById("create-simple-description").value = "";
+    } else if (itemType === "visual") {
+        document.getElementById("create-visual-name").value = "";
+        document.getElementById("create-visual-description").value = "";
+        document.getElementById("create-visual-imageURL").value = "";
+    }
+}
+
 btnNewItem.addEventListener("click", () => {
     document.getElementById("buttons-selection").style.display = "block";
     document.getElementById("item-simple-form").style.display = "none";
@@ -209,7 +220,8 @@ btnNewItem.addEventListener("click", () => {
 });
 
 simpleBtn.addEventListener("click", () => {
-    itemSlected = "simple";
+    itemSelected = "simple";
+    clearInputs(itemSelected);
     document.getElementById("buttons-selection").style.display = "none";
     document.getElementById("item-simple-form").style.display = "block";
     document.getElementById("item-visual-form").style.display = "none";
@@ -217,7 +229,8 @@ simpleBtn.addEventListener("click", () => {
 });
 
 visualBtn.addEventListener("click", () => {
-    itemSlected = "visual";
+    itemSelected = "visual";
+    clearInputs(itemSelected);
     document.getElementById("buttons-selection").style.display = "none";
     document.getElementById("item-simple-form").style.display = "none";
     document.getElementById("item-visual-form").style.display = "block";
@@ -228,7 +241,7 @@ createItem.addEventListener("click", () => {
     let name, description, creationDate, modificationDate, imageURL;
     let duplicatedItem = false;
     
-    if (itemSlected === "simple") {
+    if (itemSelected === "simple") {
         name = document.getElementById("create-simple-name").value;
         description = document.getElementById("create-simple-description").value;
         creationDate = document.getElementById("create-simple-creationDate").value;
@@ -238,7 +251,7 @@ createItem.addEventListener("click", () => {
         addDeleteListeners();
         addUpdateListeners();
         $('#createItem').modal("hide");
-    } else if (itemSlected === "visual") {
+    } else if (itemSelected === "visual") {
         name = document.getElementById("create-visual-name").value;
         description = document.getElementById("create-visual-description").value;
         creationDate = document.getElementById("create-visual-creationDate").value;
