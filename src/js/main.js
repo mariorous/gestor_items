@@ -30,31 +30,31 @@ function showAlert(message, type = "success") {
     }, 3000);
   }
 
-function addUpdateListeners() {
-    const updateItemBtn = document.querySelectorAll(".item-desc");
-    updateItemBtn.forEach(btn => {
-        btn.addEventListener("click", () => {
-            let nameToUpdate = btn.getAttribute("name-item");
-            let typeItem = btn.getAttribute("type-item");
+  function addUpdateListeners() {
+    const tableContent = document.querySelector(".table-content");
+    tableContent.addEventListener("click", (event) => {
+        const btn = event.target.closest(".item-desc");
+        if (!btn) return; // Si no se hizo clic en un .item-desc, salir
 
-            if (typeItem === "simple") {
-                document.getElementById("update-item-simple-form").style.display = "block";
-                document.getElementById("update-item-visual-form").style.display = "none";
-                
-            } else if (typeItem === "visual") {
-                document.getElementById("update-item-simple-form").style.display = "none";
-                document.getElementById("update-item-visual-form").style.display = "block";
- 
-            } else {
-                console.log('Ha habido un error con el tipo de item');
-            }
+        let nameToUpdate = btn.getAttribute("name-item");
+        let typeItem = btn.getAttribute("type-item");
 
-            document.getElementById("update-item").addEventListener("click", () => {
-                let itemsFromStorage = JSON.parse(localStorage.getItem("items"));
-                let itemToUpdate = itemsFromStorage.find(item => item.name === nameToUpdate);
-                console.log(itemToUpdate);
-            });
-        });
+        // Mostrar el formulario correspondiente
+        if (typeItem === "simple") {
+            document.getElementById("update-item-simple-form").style.display = "block";
+            document.getElementById("update-item-visual-form").style.display = "none";
+        } else if (typeItem === "visual") {
+            document.getElementById("update-item-simple-form").style.display = "none";
+            document.getElementById("update-item-visual-form").style.display = "block";
+        } else {
+            console.log('Ha habido un error con el tipo de item');
+        }
+
+        document.getElementById("update-item").onclick = () => {
+            let itemsFromStorage = JSON.parse(localStorage.getItem("items"));
+            let itemToUpdate = itemsFromStorage.find(item => item.name === nameToUpdate);
+            console.log(itemToUpdate);
+        };
     });
 }
 
