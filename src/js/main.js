@@ -74,6 +74,8 @@ function showAlert(message, type = "success") {
                 itemToUpdate.creationDate = creationDate;
                 itemToUpdate.modificationDate = modificationDate;
                 gestor.updateItem(itemToUpdate);
+                addDeleteListeners();
+                addUpdateListeners();
                 $('#updateItem').modal("hide");
                 showAlert(`El ítem "${nameToUpdate}" se ha editado correctamente.`, "warning");
             });
@@ -100,15 +102,14 @@ function showAlert(message, type = "success") {
                 itemToUpdate.modificationDate = modificationDate;
                 itemToUpdate.imageURL = imageURL;
                 gestor.updateItem(itemToUpdate);
+                addDeleteListeners();
+                addUpdateListeners();
                 $('#updateItem').modal("hide");
                 showAlert(`El ítem "${nameToUpdate}" se ha editado correctamente.`, "warning");
             });
         } else {
             console.log('Ha habido un error con el tipo de item');
         }
-        
-        addDeleteListeners();
-        addUpdateListeners();
     });
 }
 
