@@ -36,8 +36,24 @@ function addUpdateListeners() {
         btn.addEventListener("click", () => {
             let nameToUpdate = btn.getAttribute("name-item");
             let typeItem = btn.getAttribute("type-item");
-            console.log(nameToUpdate);
-            console.log(typeItem);
+
+            if (typeItem === "simple") {
+                document.getElementById("update-item-simple-form").style.display = "block";
+                document.getElementById("update-item-visual-form").style.display = "none";
+                
+            } else if (typeItem === "visual") {
+                document.getElementById("update-item-simple-form").style.display = "none";
+                document.getElementById("update-item-visual-form").style.display = "block";
+ 
+            } else {
+                console.log('Ha habido un error con el tipo de item');
+            }
+
+            document.getElementById("update-item").addEventListener("click", () => {
+                let itemsFromStorage = JSON.parse(localStorage.getItem("items"));
+                let itemToUpdate = itemsFromStorage.find(item => item.name === nameToUpdate);
+                console.log(itemToUpdate);
+            });
         });
     });
 }
@@ -50,7 +66,7 @@ function addDeleteListeners() {
             confirmDeleteBtn.addEventListener("click", () => {
                 let nameToDelete = btn.getAttribute("name-item");
                 gestor.removeItem(nameToDelete);
-                addDeleteListeners();
+                // addDeleteListeners();
                 $('#confirmDeleteModal').modal("hide");
                 // Mostrar notificación de eliminación
                 showAlert(`El ítem "${nameToDelete}" se ha eliminado correctamente.`, "danger");
@@ -71,6 +87,7 @@ searchInput.addEventListener('input', () => {
     gestor.items = itemsFromStorage;
     gestor.renderTable(true);
     addDeleteListeners();
+    addUpdateListeners();
 })
 
 btnNewItem.addEventListener("click", () => {
@@ -128,6 +145,7 @@ createItem.addEventListener("click", () => {
     // Mostrar notificación de creación
     showAlert(`El ítem "${name}" se ha creado correctamente.`, "success");
     addDeleteListeners();
+    addUpdateListeners();
     console.log('Inventario del gestor: ', gestor.items);
 
 });
