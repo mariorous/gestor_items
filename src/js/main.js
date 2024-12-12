@@ -43,7 +43,15 @@ function showAlert(message, type = "success") {
 
         let itemsFromStorage = JSON.parse(localStorage.getItem("items"));
         let itemToUpdate = itemsFromStorage.find(item => item.name === nameToUpdate);
-        console.log(itemToUpdate);
+
+        // Añadir el listener al botón de actualización, eliminando duplicados
+        const updateButton = document.getElementById("update-item");
+
+        // Eliminar cualquier listener duplicado previamente registrado
+        updateButton.replaceWith(updateButton.cloneNode(true));
+
+        // Reasignar el listener al nuevo botón
+        const newUpdateButton = document.getElementById("update-item");
 
         // Mostrar el formulario correspondiente
         if (typeItem === "simple") {
@@ -54,6 +62,19 @@ function showAlert(message, type = "success") {
             document.getElementById("update-simple-description").value = itemToUpdate.description;
             document.getElementById("update-simple-creationDate").value = itemToUpdate.creationDate;
             document.getElementById("update-simple-modificationDate").value = modificationDate;
+
+            newUpdateButton.addEventListener("click", () => {
+                let name = document.getElementById("update-simple-name").value;
+                let description = document.getElementById("update-simple-description").value;
+                let creationDate = document.getElementById("update-simple-creationDate").value;
+                let modificationDate = document.getElementById("update-simple-modificationDate").value;
+                itemToUpdate.name = name;
+                itemToUpdate.description = description;
+                itemToUpdate.creationDate = creationDate;
+                itemToUpdate.modificationDate = modificationDate;
+                console.log(itemToUpdate);
+                // gestor.updateItem(itemToUpdate);
+            });
         } else if (typeItem === "visual") {
             document.getElementById("update-item-simple-form").style.display = "none";
             document.getElementById("update-item-visual-form").style.display = "block";
@@ -63,21 +84,25 @@ function showAlert(message, type = "success") {
             document.getElementById("update-visual-creationDate").value = itemToUpdate.creationDate;
             document.getElementById("update-visual-modificationDate").value = modificationDate;
             document.getElementById("update-visual-imageURL").value = itemToUpdate.imageURL;
+
+            newUpdateButton.addEventListener("click", () => {
+                let name = document.getElementById("update-visual-name").value;
+                let description = document.getElementById("update-visual-description").value;
+                let creationDate = document.getElementById("update-visual-creationDate").value;
+                let modificationDate = document.getElementById("update-visual-modificationDate").value;
+                let imageURL = document.getElementById("update-visual-imageURL").value;
+                itemToUpdate.name = name;
+                itemToUpdate.description = description;
+                itemToUpdate.creationDate = creationDate;
+                itemToUpdate.modificationDate = modificationDate;
+                itemToUpdate.imageURL = imageURL;
+                console.log(itemToUpdate);
+                // gestor.updateItem(itemToUpdate);
+            });
         } else {
             console.log('Ha habido un error con el tipo de item');
         }
 
-        // Añadir el listener al botón de actualización, eliminando duplicados
-        const updateButton = document.getElementById("update-item");
-
-        // Eliminar cualquier listener duplicado previamente registrado
-        updateButton.replaceWith(updateButton.cloneNode(true));
-
-        // Reasignar el listener al nuevo botón
-        const newUpdateButton = document.getElementById("update-item");
-        newUpdateButton.addEventListener("click", () => {
-            
-        });
     });
 }
 
