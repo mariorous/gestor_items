@@ -7,7 +7,7 @@ export class Gestor {
         this.items = [];
     }
 
-    addItem(item) {
+    addItem(itemToAdd) {
         if (localStorage.getItem('items') === null) {
             this.items = [];
         } else {
@@ -15,8 +15,13 @@ export class Gestor {
         }
         console.log('Items antes de añadir el actual: ', this.items);
 
-        this.items.push(item);
-        LocalStorage.setItems(JSON.stringify(this.items));
+        if (this.items.find(item => item.name === itemToAdd.name)) {
+            return true;
+        } else {
+            this.items.push(itemToAdd);
+            LocalStorage.setItems(JSON.stringify(this.items));
+        }
+        
         this.renderTable();
     }
 
