@@ -35,26 +35,49 @@ function showAlert(message, type = "success") {
     tableContent.addEventListener("click", (event) => {
         const btn = event.target.closest(".item-desc");
         if (!btn) return; // Si no se hizo clic en un .item-desc, salir
+        const date = new Date();
+        const modificationDate = date.toISOString().split('T')[0]; // Formato YYYY-MM-DD
 
         let nameToUpdate = btn.getAttribute("name-item");
         let typeItem = btn.getAttribute("type-item");
+
+        let itemsFromStorage = JSON.parse(localStorage.getItem("items"));
+        let itemToUpdate = itemsFromStorage.find(item => item.name === nameToUpdate);
+        console.log(itemToUpdate);
 
         // Mostrar el formulario correspondiente
         if (typeItem === "simple") {
             document.getElementById("update-item-simple-form").style.display = "block";
             document.getElementById("update-item-visual-form").style.display = "none";
+
+            document.getElementById("update-simple-name").value = itemToUpdate.name;
+            document.getElementById("update-simple-description").value = itemToUpdate.description;
+            document.getElementById("update-simple-creationDate").value = itemToUpdate.creationDate;
+            document.getElementById("update-simple-modificationDate").value = modificationDate;
         } else if (typeItem === "visual") {
             document.getElementById("update-item-simple-form").style.display = "none";
             document.getElementById("update-item-visual-form").style.display = "block";
+
+            document.getElementById("update-visual-name").value = itemToUpdate.name;
+            document.getElementById("update-visual-description").value = itemToUpdate.description;
+            document.getElementById("update-visual-creationDate").value = itemToUpdate.creationDate;
+            document.getElementById("update-visual-modificationDate").value = modificationDate;
+            document.getElementById("update-visual-imageURL").value = itemToUpdate.imageURL;
         } else {
             console.log('Ha habido un error con el tipo de item');
         }
 
-        document.getElementById("update-item").onclick = () => {
-            let itemsFromStorage = JSON.parse(localStorage.getItem("items"));
-            let itemToUpdate = itemsFromStorage.find(item => item.name === nameToUpdate);
-            console.log(itemToUpdate);
-        };
+        // Añadir el listener al botón de actualización, eliminando duplicados
+        const updateButton = document.getElementById("update-item");
+
+        // Eliminar cualquier listener duplicado previamente registrado
+        updateButton.replaceWith(updateButton.cloneNode(true));
+
+        // Reasignar el listener al nuevo botón
+        const newUpdateButton = document.getElementById("update-item");
+        newUpdateButton.addEventListener("click", () => {
+            
+        });
     });
 }
 
