@@ -7,7 +7,7 @@ export class Gestor {
         this.items = [];
     }
 
-    addItem(item) {
+    addItem(itemToAdd) {
         if (localStorage.getItem('items') === null) {
             this.items = [];
         } else {
@@ -15,19 +15,32 @@ export class Gestor {
         }
         console.log('Items antes de añadir el actual: ', this.items);
 
-        this.items.push(item);
-        LocalStorage.setItems(JSON.stringify(this.items));
+        if (this.items.find(item => item.name === itemToAdd.name)) {
+            return true;
+        } else {
+            this.items.push(itemToAdd);
+            LocalStorage.setItems(JSON.stringify(this.items));
+        }
+        
         this.renderTable();
     }
 
-    /* updateItem(item) {
-        this.items.forEach((p, index) => {
-            if (p.id === item.id) {
-                this.items[index] = item;
+    updateItem(itemToUpdate) {
+        let items = LocalStorage.getItems();
+
+        // Iterar por los ítems y actualizar el que coincide
+        items.forEach(item => {
+            if (item.name === itemToUpdate.name) {
+                item.description = itemToUpdate.description;
+                item.creationDate = itemToUpdate.creationDate;
+                item.modificationDate = itemToUpdate.modificationDate;
+                item.imageURL = itemToUpdate.imageURL;
             }
         });
+
+        LocalStorage.setItems(JSON.stringify(items));
+        this.renderTable();
     }
-    */
 
     removeItem(nameToDelete) {
         if (localStorage.getItem('items') === null) {
@@ -77,13 +90,18 @@ export class Gestor {
                     `;
 
                 if (item.imageURL) {
-                    itemInfo += `<img class="item-image" src="${item.imageURL}" alt="Imagen del producto">`;
+                    itemInfo += `<img class="item-image" src="${item.imageURL}" alt="Imagen del producto">
+                                </div>
+                                <div class="item-desc" name-item="${item.name}" type-item="visual" data-bs-toggle="modal" data-bs-target="#updateItem">
+                    `;
                 } else {
-                    itemInfo += `<img class="item-image no-image" src="./src/assets/no_image.jpg" alt="Imagen del producto">`;
+                    itemInfo += `<img class="item-image no-image" src="./src/assets/no_image.jpg" alt="Imagen del producto">
+                                </div>
+                                <div class="item-desc" name-item="${item.name}" type-item="simple" data-bs-toggle="modal" data-bs-target="#updateItem">
+                    `;
                 }
 
-                itemInfo += ` </div>
-                        <div class="item-desc">
+                itemInfo += `
                             <h3>${item.name}</h3>
                             <p>${item.description}</p>
                         </div>

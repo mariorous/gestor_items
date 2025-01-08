@@ -154,6 +154,11 @@ p {
 .container-card .item-desc {
     margin: 0 10px;
 }
+
+.item-desc :hover{
+    cursor: pointer;
+
+}
 .container-card .item-desc h3 {
     font-size: 20px;
 }
