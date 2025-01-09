@@ -55,15 +55,16 @@ export class Gestor {
     }
     
 
-    renderTable(filtering) {
+    renderTable(filtering, currentPage = 1) {
+        const itemsPerPage = 5;
         const tableContent = document.querySelector(".table-content");
         tableContent.innerHTML = ""; // Limpia el contenido previo de la tabla
-
+    
         // Si no está filtrando, mostrar todos los ítems del localStorage
         if (!filtering) {
             this.items = LocalStorage.getItems();
         }
-
+    
         // Si no hay ítems, mostrar un mensaje
         if (this.items.length === 0) {
             tableContent.innerHTML = `
@@ -79,47 +80,66 @@ export class Gestor {
             `;
             return;
         }
-
-        // Si está filtrando, mostrar solo los ítems que coincidan con el filtro
-        this.items.forEach(item => {
+    
+        // Calcular el índice de inicio y fin de los ítems a mostrar
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const itemsToShow = this.items.slice(startIndex, endIndex);
+    
+        // Mostrar solo los ítems correspondientes a la página actual
+        itemsToShow.forEach(item => {
             let itemInfo = `
                 <div class="container-card">
                     <div class="img-info-div">
-
                         <div class="image-url">
-                    `;
-
-                if (item.imageURL) {
-                    itemInfo += `<img class="item-image" src="${item.imageURL}" alt="Imagen del producto">
-                                </div>
-                                <div class="item-desc" name-item="${item.name}" type-item="visual" data-bs-toggle="modal" data-bs-target="#updateItem">
-                    `;
-                } else {
-                    itemInfo += `<img class="item-image no-image" src="./src/assets/no_image.jpg" alt="Imagen del producto">
-                                </div>
-                                <div class="item-desc" name-item="${item.name}" type-item="simple" data-bs-toggle="modal" data-bs-target="#updateItem">
-                    `;
-                }
-
-                itemInfo += `
-                            <h3>${item.name}</h3>
-                            <p>${item.description}</p>
-                        </div>
-                    </div>
-                    <div class="creation-date">
-                        <p>${item.creationDate}</p>
-                    </div>
-                    <div class="modification-date">
-                        <p>${item.modificationDate}</p>
-                    </div>
-                    <div class="button">
-                        <button class="delete-item-btn" name-item="${item.name}" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Eliminar</button>
+            `;
+    
+            if (item.imageURL) {
+                itemInfo += `<img class="item-image" src="${item.imageURL}" alt="Imagen del producto">
+                            </div>
+                            <div class="item-desc" name-item="${item.name}" type-item="visual" data-bs-toggle="modal" data-bs-target="#updateItem">
+                `;
+            } else {
+                itemInfo += `<img class="item-image no-image" src="./src/assets/no_image.jpg" alt="Imagen del producto">
+                            </div>
+                            <div class="item-desc" name-item="${item.name}" type-item="simple" data-bs-toggle="modal" data-bs-target="#updateItem">
+                `;
+            }
+    
+            itemInfo += `
+                        <h3>${item.name}</h3>
+                        <p>${item.description}</p>
                     </div>
                 </div>
+                <div class="creation-date">
+                    <p>${item.creationDate}</p>
+                </div>
+                <div class="modification-date">
+                    <p>${item.modificationDate}</p>
+                </div>
+                <div class="button">
+                    <button class="delete-item-btn" name-item="${item.name}" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Eliminar</button>
+                </div>
+            </div>
             `;
-
-        tableContent.innerHTML += itemInfo;
+    
+            tableContent.innerHTML += itemInfo;
         });
+    
+        // Añadir controles de paginación
+        const totalPages = Math.ceil(this.items.length / itemsPerPage);
+        const paginationContainer = document.createElement('div');
+        paginationContainer.className = 'pagination-container';
+    
+        for (let i = 1; i <= totalPages; i++) {
+            const pageButton = document.createElement('button');
+            pageButton.className = 'page-button';
+            pageButton.innerText = i;
+            pageButton.addEventListener('click', () => this.renderTable(filtering, i));
+            paginationContainer.appendChild(pageButton);
+        }
+    
+        tableContent.appendChild(paginationContainer);
     }
 
     set items(items) {
