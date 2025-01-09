@@ -125,7 +125,14 @@ export class Gestor {
     
             tableContent.innerHTML += itemInfo;
         });
-    
+        
+        /*
+        Math.ceil() se utiliza para calcular el número total de páginas necesarias para mostrar todos los ítems, 
+        redondeando hacia arriba en caso de que haya ítems que no llenen completamente una página. Por ejemplo, 
+        si tienes 12 ítems y muestras 5 ítems por página, this.items.length / itemsPerPage sería 2.4. Math.ceil(2.4) redondea hacia arriba a 3, 
+        indicando que necesitas 3 páginas para mostrar todos los ítems.
+        */
+       
         // Añadir controles de paginación
         const totalPages = Math.ceil(this.items.length / itemsPerPage);
         const paginationContainer = document.createElement('div');
