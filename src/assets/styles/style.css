@@ -252,3 +252,20 @@ textarea {
     font-size: 1rem;
     text-align: center;
 }
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.page-button {
+    padding: 5px 10px;
+    margin: 0 5px;
+    background-color: #3C43F9;
+    color: #ffffff;
+    font-weight: medium;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
