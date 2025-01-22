@@ -195,6 +195,7 @@ searchInput.addEventListener('input', () => {
     addUpdateListeners();
 });
 
+// Limpiar los inputs de los formularios
 function clearInputs(itemType) {
     if (itemType === "simple") {
         document.getElementById("create-simple-name").value = "";
@@ -206,6 +207,7 @@ function clearInputs(itemType) {
     }
 }
 
+// Muestra menú de elección al hacer clic en "Nuevo ítem"
 btnNewItem.addEventListener("click", () => {
     document.getElementById("buttons-selection").style.display = "block";
     document.getElementById("item-simple-form").style.display = "none";
@@ -219,6 +221,7 @@ btnNewItem.addEventListener("click", () => {
     document.getElementById("create-visual-modificationDate").value = today;
 });
 
+// Muestra el formulario correspondiente al tipo de ítem seleccionado
 simpleBtn.addEventListener("click", () => {
     itemSelected = "simple";
     clearInputs(itemSelected);
@@ -228,6 +231,7 @@ simpleBtn.addEventListener("click", () => {
     createItem.style.display = "block";
 });
 
+// Muestra el formulario correspondiente al tipo de ítem seleccionado
 visualBtn.addEventListener("click", () => {
     itemSelected = "visual";
     clearInputs(itemSelected);
@@ -247,7 +251,7 @@ createItem.addEventListener("click", () => {
         creationDate = document.getElementById("create-simple-creationDate").value;
         modificationDate = document.getElementById("create-simple-modificationDate").value;
         const item = new ItemSimple(name, description, creationDate, modificationDate);
-        duplicatedItem =gestor.addItem(item.toJSON());
+        duplicatedItem = gestor.addItem(item.toJSON());
         addDeleteListeners();
         addUpdateListeners();
         $('#createItem').modal("hide");

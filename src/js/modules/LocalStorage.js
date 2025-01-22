@@ -4,6 +4,7 @@ import { ItemVisual } from "./ItemVisual.js";
 export class LocalStorage {
     static #storage = localStorage;
 
+    // Añade los items al localStorage con su clave 'items'
     static setItems(items) {
         this.#storage.setItem('items', items);
     }
