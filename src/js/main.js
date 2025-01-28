@@ -112,15 +112,16 @@ function showAlert(message, type = "success") {
         }
     });
 }
-
 function addDeleteListeners() {
     const deleteItemBtn = document.querySelectorAll(".delete-item-btn");
     let nameToDelete = null; // Variable para almacenar el nombre del ítem a eliminar
+    console.log(deleteItemBtn);
 
     deleteItemBtn.forEach(btn => {
         btn.addEventListener("click", () => {
             // Guardar el nombre del ítem que se quiere eliminar
             nameToDelete = btn.getAttribute("name-item");
+            console.log(nameToDelete);
         });
     });
 
@@ -138,9 +139,7 @@ function addDeleteListeners() {
             $('#confirmDeleteModal').modal("hide");
 
             // Actualizar la tabla y volver a registrar los listeners
-            gestor.renderTable();
-            addDeleteListeners();
-            addUpdateListeners();
+            gestor.renderTable(false, 1, () => { addDeleteListeners(); addUpdateListeners(); });
 
             // Mostrar notificación de eliminación
             showAlert(`El ítem "${nameToDelete}" se ha eliminado correctamente.`, "danger");
@@ -151,10 +150,8 @@ function addDeleteListeners() {
     });
 }
 
+gestor.renderTable(false, 1, () => { addDeleteListeners(); addUpdateListeners(); });
 
-gestor.renderTable();
-addDeleteListeners();
-addUpdateListeners();
 
 const searchInput = document.getElementById('searchInput');
 searchInput.addEventListener('input', () => {
@@ -190,9 +187,7 @@ searchInput.addEventListener('input', () => {
 
     // Actualizar los elementos del gestor y volver a renderizar
     gestor.items = itemsFromStorage;
-    gestor.renderTable(true);
-    addDeleteListeners();
-    addUpdateListeners();
+    gestor.renderTable(true, 1, () => { addDeleteListeners(); addUpdateListeners(); });
 });
 
 // Limpiar los inputs de los formularios

@@ -55,7 +55,7 @@ export class Gestor {
     }
     
 
-    renderTable(filtering, currentPage = 1) {
+    renderTable(filtering = false, currentPage = 1, listeners = () => {}) {
         const itemsPerPage = 5;
         const tableContent = document.querySelector(".table-content");
         tableContent.innerHTML = ""; // Limpia el contenido previo de la tabla
@@ -142,11 +142,15 @@ export class Gestor {
             const pageButton = document.createElement('button');
             pageButton.className = 'page-button';
             pageButton.innerText = i;
-            pageButton.addEventListener('click', () => this.renderTable(filtering, i));
+            pageButton.addEventListener('click', () => {
+                this.renderTable(filtering, i, listeners);
+            });
             paginationContainer.appendChild(pageButton);
         }
-    
+
+        
         tableContent.appendChild(paginationContainer);
+        listeners();
     }
 
     set items(items) {
